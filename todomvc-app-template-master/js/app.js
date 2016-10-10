@@ -3,7 +3,7 @@
 
 	// Your starting point. Enjoy the ride!
 	var myApp = angular.module('app',[]);
-	myApp.controller('MainController', ['$scope','$location', function($scope,$location){
+	myApp.controller('MainController', ['$scope', function($scope,$location){
 		$scope.todos=[
 			{
 				id:0.123,
@@ -73,27 +73,7 @@
 			}
 			$scope.toggleAll = !$scope.toggleAll;
 		};
-
-		//filter All Active Completed
-		$scope.selector = {};
-		$scope.location = $location;
-		//watch 只能监视属于$scope的成员 
-		$scope.$watch('location.path()', function(now, old){
-			//console.log(now);
-			switch(now){
-		        case '/active':
-        			$scope.selector={ completed : false };
-        			break;
-        		case '/completed':
-        			$scope.selector={ completed : true };
-        			break;
-        		default:
-        			$scope.selector={};
-        			break;
-			}
-		});
-
-
+		
 
 	}]);
 })(angular);

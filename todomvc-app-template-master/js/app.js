@@ -2,8 +2,24 @@
 	'use strict';
 
 	// Your starting point. Enjoy the ride!
-	var myApp = angular.module('app',[]);
-	myApp.controller('MainController', ['$scope', function($scope,$location){
+	var myApp = angular.module('app',['ngRoute']);
+
+	  // 路由配置
+	  myApp.config(['$routeProvider', function($routeProvider) {
+	    $routeProvider
+	    // /asdasda {status:asdasda}
+	      .when('/:status?', {
+	        controller: 'MainController',
+	        templateUrl: 'main_tmpl'
+	      })
+	      .otherwise({ redirectTo: '/' });
+	  }]);
+	//myApp.controller('MainController', ['$scope', function($scope,$location){
+	myApp.controller('MainController', [
+      '$scope', 
+      '$routeParams',
+      '$route',
+       function($scope, $routeParams, $route ) {
 		$scope.todos=[
 			{
 				id:0.123,
@@ -73,6 +89,21 @@
 			}
 			$scope.toggleAll = !$scope.toggleAll;
 		};
+		// 状态筛选
+    	$scope.selector = {};
+		 var status = $routeParams.status;
+		    switch(status){
+		      case 'active':
+		        $scope.selector = {completed :false};
+		        break;
+		      case 'completed':
+		        $scope.selector = {completed : true};
+		        break;
+		      default:
+		        $route.updateParams({status:''});
+		        $scope.selector = {};
+		        break;
+		    }
 		
 
 	}]);

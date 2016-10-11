@@ -3,7 +3,6 @@
 
 	// Your starting point. Enjoy the ride!
 	var myApp = angular.module('app',['ngRoute']);
-
 	myApp.config(['$routeProvider',function($routeProvider) {
 		$routeProvider
           .when('/:status?',{
@@ -17,7 +16,7 @@
 	myApp.controller('MainController', [
 		'$scope', 
 		'$routeParams',
-		'$route'
+		'$route',
 		function($scope,$routeParams,$route){
 		$scope.todos=[
 			{
